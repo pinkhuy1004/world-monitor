@@ -894,13 +894,13 @@ const MALAYSIA_FEEDS: Record<string, Feed[]> = {
   ],
   gov_my: [
     // Government sources via Google News aggregation — direct gov RSS feeds are unreliable/non-standard
-    { name: 'Bank Negara Malaysia', url: rss('https://news.google.com/rss/search?q=%22Bank+Negara+Malaysia%22&hl=en-MY&gl=MY&ceid=MY:en') },
-    { name: 'MCMC Media', url: rss('https://news.google.com/rss/search?q=MCMC+Malaysia&hl=en-MY&gl=MY&ceid=MY:en') },
-    { name: 'MOH Updates', url: rss('https://news.google.com/rss/search?q=%22Ministry+of+Health+Malaysia%22+OR+%22KKM+Malaysia%22&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'Bank Negara Malaysia', url: rss('https://news.google.com/rss/search?q=Bank+Negara+Malaysia&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'MCMC Media', url: rss('https://news.google.com/rss/search?q=MCMC+Malaysia+news&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'MOH Updates', url: rss('https://news.google.com/rss/search?q=Ministry+of+Health+Malaysia+KKM&hl=en-MY&gl=MY&ceid=MY:en') },
   ],
   business_my: [
-    { name: 'Edge Malaysia', url: rss('https://news.google.com/rss/search?q=site:theedgemalaysia.com&hl=en-MY&gl=MY&ceid=MY:en') },
-    { name: 'Bursa Malaysia', url: rss('https://news.google.com/rss/search?q=%22Bursa+Malaysia%22&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'Edge Malaysia', url: rss('https://news.google.com/rss/search?q=The+Edge+Malaysia&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'Bursa Malaysia', url: rss('https://news.google.com/rss/search?q=Bursa+Malaysia+news&hl=en-MY&gl=MY&ceid=MY:en') },
   ],
   igaming: [
     { name: 'iGaming Business', url: rss('https://igamingbusiness.com/feed/') },

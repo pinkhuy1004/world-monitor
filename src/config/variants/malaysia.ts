@@ -28,12 +28,12 @@ export const DEFAULT_PANELS: Record<string, PanelConfig> = {
   'etf-flows': FULL_PANELS['etf-flows']!,
   'yield-curve': { name: 'panels.yieldCurve', enabled: true, priority: 1 },
   commodities: FULL_PANELS['commodities']!,
-  malaysia: { name: 'panels.malaysia', enabled: true, priority: 1, category: 'news' },
-  gov_my: { name: 'panels.gov_my', enabled: true, priority: 2, category: 'gov' },
-  business_my: { name: 'panels.business_my', enabled: true, priority: 2, category: 'business' },
-  igaming: { name: 'panels.igaming', enabled: true, priority: 3, category: 'industry' },
-  social_my: { name: 'panels.social_my', enabled: true, priority: 3, category: 'social' },
-  sports: { name: 'panels.sports', enabled: true, priority: 4, category: 'sports' },
+  malaysia: { name: 'panels.malaysia', enabled: true, priority: 1 },
+  gov_my: { name: 'panels.gov_my', enabled: true, priority: 2 },
+  business_my: { name: 'panels.business_my', enabled: true, priority: 2 },
+  igaming: { name: 'panels.igaming', enabled: true, priority: 3 },
+  social_my: { name: 'panels.social_my', enabled: true, priority: 3 },
+  sports: { name: 'panels.sports', enabled: true, priority: 4 },
   'live-webcams': FULL_PANELS['live-webcams']!,
 };
 
