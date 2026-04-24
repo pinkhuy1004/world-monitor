@@ -897,22 +897,33 @@ const COMMODITY_MOBILE_MAP_LAYERS: MapLayers = {
 // UNIFIED PANEL REGISTRY
 // ============================================
 
-/** All panels from all variants — union with FULL taking precedence for duplicate keys. */
 export const ALL_PANELS: Record<string, PanelConfig> = {
   ...HAPPY_PANELS,
   ...COMMODITY_PANELS,
   ...TECH_PANELS,
   ...FINANCE_PANELS,
   ...FULL_PANELS,
+  malaysia: { name: 'Malaysia News', enabled: true, priority: 1, category: 'news' },
+  gov_my: { name: 'Malaysia Government', enabled: true, priority: 2, category: 'gov' },
+  business_my: { name: 'Malaysia Business', enabled: true, priority: 2, category: 'business' },
+  igaming: { name: 'iGaming News', enabled: true, priority: 3, category: 'industry' },
+  social_my: { name: 'Malaysia Social Signal', enabled: true, priority: 3, category: 'social' },
+  sports: { name: 'Sports News', enabled: true, priority: 4, category: 'sports' },
 };
 
-/** Per-variant canonical panel order (keys = which panels are enabled by default). */
 export const VARIANT_DEFAULTS: Record<string, string[]> = {
   full:      Object.keys(FULL_PANELS),
   tech:      Object.keys(TECH_PANELS),
   finance:   Object.keys(FINANCE_PANELS),
   commodity: Object.keys(COMMODITY_PANELS),
   happy:     Object.keys(HAPPY_PANELS),
+  malaysia:  [
+    'map', 'live-news', 'insights', 'malaysia', 'gov_my', 'business_my', 'igaming', 'social_my',
+    'strategic-posture', 'cii', 'strategic-risk',
+    'markets', 'politics', 'tech', 'finance', 'intel', 'gov', 'security',
+    'economic', 'consumer-prices', 'trade-policy', 'supply-chain', 'energy-complex',
+    'oil-inventories', 'stablecoins', 'etf-flows', 'yield-curve', 'commodities', 'sports'
+  ],
 };
 
 /**
@@ -937,6 +948,10 @@ export const VARIANT_PANEL_OVERRIDES: Partial<Record<string, Partial<Record<stri
   },
   happy: {
     map:         { name: 'World Map' },
+  },
+  malaysia: {
+    map:         { name: 'Malaysia Monitor' },
+    'live-news': { name: 'Latest Headlines' },
   },
 };
 

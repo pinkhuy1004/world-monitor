@@ -127,4 +127,23 @@ export const VARIANT_META: { full: VariantMeta; [k: string]: VariantMeta } = {
       'Futures market data',
     ],
   },
+  malaysia: {
+    title: 'Malaysia Monitor - Real-Time National Intelligence Dashboard',
+    description: 'Real-time Malaysia-centric intelligence dashboard with local news, national markets, infrastructure monitoring, and regional geopolitical data.',
+    keywords: 'Malaysia news, Malaysia markets, KLCI, Malaysia politics, regional intelligence, Southeast Asia, maritime security, infrastructure monitoring, real-time monitoring',
+    url: 'https://malaysiamonitor.com/',
+    siteName: 'Malaysia Monitor',
+    shortName: 'MalaysiaMonitor',
+    subject: 'Real-Time Malaysia Intelligence and Regional Awareness',
+    classification: 'National Intelligence Dashboard, News Aggregator',
+    categories: ['news', 'politics'],
+    features: [
+      'Real-time Malaysia news',
+      'Local market tracking (KLCI)',
+      'Regional maritime monitoring',
+      'National infrastructure mapping',
+      'Geopolitical intelligence',
+      'Crisis alerts',
+    ],
+  },
 };

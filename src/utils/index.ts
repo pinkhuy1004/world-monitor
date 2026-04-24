@@ -1,3 +1,6 @@
+import { getCurrentLanguage } from '@/services/i18n';
+import { SITE_VARIANT } from '@/config/variant';
+
 export function formatTime(date: Date): string {
   const now = new Date();
   const diff = Math.floor((now.getTime() - date.getTime()) / 1000);
@@ -12,21 +15,24 @@ export function formatTime(date: Date): string {
     if (diff < 86400) return rtf.format(-Math.round(diff / 3600), 'hour');
     return rtf.format(-Math.round(diff / 86400), 'day');
   } catch (e) {
-    if (diff < 60) return 'Just now';
-    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-    return `${Math.floor(diff / 86400)}d ago`;
+    const suffix = lang === 'ms' ? 'lalu' : 'ago';
+    if (diff < 60) return lang === 'ms' ? 'Baru saja' : 'Just now';
+    if (diff < 3600) return `${Math.floor(diff / 60)}m ${suffix}`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}h ${suffix}`;
+    return `${Math.floor(diff / 86400)}d ${suffix}`;
   }
 }
 
 export function formatPrice(price: number): string {
+  const lang = getCurrentLanguage();
+  const symbol = SITE_VARIANT === 'malaysia' ? 'RM' : '$';
   if (price >= 1000) {
-    return `$${price.toLocaleString(undefined, {
+    return `${symbol}${price.toLocaleString(lang, {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     })}`;
   }
-  return `$${price.toLocaleString(undefined, {
+  return `${symbol}${price.toLocaleString(lang, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`;

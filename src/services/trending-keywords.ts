@@ -91,6 +91,7 @@ const LEADER_NAMES = [
   'putin', 'zelensky', 'xi jinping', 'biden', 'trump', 'netanyahu',
   'khamenei', 'erdogan', 'modi', 'macron', 'scholz', 'starmer',
   'orban', 'milei', 'kim jong un', 'al-sisi',
+  'anwar ibrahim', 'mahathir mohamad', 'najib razak', 'muhyiddin yassin',
 ];
 const LEADER_PATTERNS = LEADER_NAMES.map(name => ({
   name,

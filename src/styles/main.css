@@ -54,6 +54,10 @@
   --map-country: #0a2018;
   --map-stroke: #0f5040;
 
+  /* Brand Colors (overridden by variants) */
+  --brand-color: #44ff88; /* default green */
+  --brand-accent: #3b82f6; /* default blue */
+
   /* Font stack */
   --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Fira Code', 'DejaVu Sans Mono', 'Liberation Mono', monospace;
   /* Base body font, controlled by font preference (mono vs system) */
@@ -198,6 +202,62 @@
   --map-country: #f0e8d8;
   --map-stroke: #c8b8a8;
 }
+
+/* ============================================================
+   Variant Specific Overrides
+   ============================================================ */
+[data-variant="malaysia"] {
+  --green: #44ff88;
+  --semantic-info: #003c8f;
+  --brand-color: #cc0001;
+  --brand-accent: #000066;
+  --brand-gold: #ffcc00;
+  --header-bg: linear-gradient(90deg, #0a0a0a 0%, #111 50%, #000044 100%);
+}
+
+[data-variant="malaysia"] .header {
+  border-bottom: 1px solid var(--brand-color);
+  background: var(--header-bg);
+}
+
+[data-variant="malaysia"] .logo {
+  color: var(--brand-gold);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+}
+
+[data-variant="malaysia"] .logo-malaysia {
+  position: relative;
+  padding-left: 24px;
+}
+
+[data-variant="malaysia"] .logo-malaysia::before {
+  content: '🇲🇾';
+  position: absolute;
+  left: 0;
+  font-size: 0.9em;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+}
+
+[data-variant="malaysia"] .variant-option.active {
+  color: #fff;
+  background: var(--brand-color);
+  border-color: var(--brand-color);
+}
+
+[data-variant="malaysia"] .variant-option.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 2px;
+  background: var(--brand-gold);
+  border-radius: 2px;
+}
+
 
 * {
   margin: 0;
@@ -22905,4 +22965,22 @@ body.map-width-resizing {
 
 .ecp-source-link:hover {
   text-decoration: underline;
+}
+
+/* ============================================================
+   Malaysia Variant Overrides
+   ============================================================ */
+[data-variant="malaysia"] {
+  --malaysia-red: #CC0001;
+  --malaysia-blue: #003C8F;
+  --malaysia-white: #FFFFFF;
+
+  --accent: var(--malaysia-red);
+  --status-live: var(--malaysia-blue);
+  --map-stroke: var(--malaysia-blue);
+  --semantic-critical: var(--malaysia-red);
+  --semantic-high: var(--malaysia-red);
+  --semantic-info: var(--malaysia-blue);
+  --threat-critical: var(--malaysia-red);
+  --threat-high: var(--malaysia-red);
 }

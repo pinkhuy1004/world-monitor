@@ -90,6 +90,7 @@ import {
   INTEL_SOURCES,
   STORAGE_KEYS,
   SITE_VARIANT,
+  VARIANT_CONFIG,
   ALL_PANELS,
   VARIANT_DEFAULTS,
 } from "@/config";
@@ -394,16 +395,25 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t("header.commodity")}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("happy", "https://happy.worldmonitor.app")}"
-               class="variant-option ${SITE_VARIANT === "happy" ? "active" : ""}"
+            <a href="${vHref('malaysia', 'https://malaysiamonitor.com')}"
+               class="variant-option ${SITE_VARIANT === 'malaysia' ? 'active' : ''}"
+               data-variant="malaysia"
+               ${vTarget('malaysia')}
+               title="${t('header.malaysia')}${SITE_VARIANT === 'malaysia' ? ` ${t('common.currentVariant')}` : ''}">
+              <span class="variant-icon">🇲🇾</span>
+              <span class="variant-label">${t('header.malaysia')}</span>
+            </a>
+            <span class="variant-divider"></span>
+            <a href="${vHref('happy', 'https://happy.worldmonitor.app')}"
+               class="variant-option ${SITE_VARIANT === 'happy' ? 'active' : ''}"
                data-variant="happy"
                ${vTarget("happy")}
                title="Good News${SITE_VARIANT === "happy" ? ` ${t("common.currentVariant")}` : ""}">
               <span class="variant-icon">☀️</span>
               <span class="variant-label">Good News</span>
             </a>`;
-          })()}</div>
-          <span class="logo">MONITOR</span><span class="logo-mobile">WORLD MONITOR NEW</span><span class="version">v${__APP_VERSION__}</span>${BETA_MODE ? '<span class="beta-badge">BETA</span>' : ""}
+      })()}</div>
+          <span class="logo ${SITE_VARIANT === 'malaysia' ? 'logo-malaysia' : ''}">${SITE_VARIANT === 'malaysia' ? 'MALAYSIA MONITOR' : 'MONITOR'}</span><span class="logo-mobile">${SITE_VARIANT === 'malaysia' ? 'Malaysia Monitor' : 'World Monitor'}</span><span class="version">v${__APP_VERSION__}</span>${BETA_MODE ? '<span class="beta-badge">BETA</span>' : ''}
           <a href="https://x.com/eliehabib" target="_blank" rel="noopener" class="credit-link">
             <svg class="x-logo" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             <span class="credit-text">@eliehabib</span>
@@ -421,14 +431,15 @@ export class PanelLayoutManager implements AppModule {
           </div>
           <div class="region-selector">
             <select id="regionSelect" class="region-select">
-              <option value="global">${t("components.deckgl.views.global")}</option>
-              <option value="america">${t("components.deckgl.views.americas")}</option>
-              <option value="mena">${t("components.deckgl.views.mena")}</option>
-              <option value="eu">${t("components.deckgl.views.europe")}</option>
-              <option value="asia">${t("components.deckgl.views.asia")}</option>
-              <option value="latam">${t("components.deckgl.views.latam")}</option>
-              <option value="africa">${t("components.deckgl.views.africa")}</option>
-              <option value="oceania">${t("components.deckgl.views.oceania")}</option>
+              <option value="global">${t('components.deckgl.views.global')}</option>
+              <option value="america">${t('components.deckgl.views.americas')}</option>
+              <option value="mena">${t('components.deckgl.views.mena')}</option>
+              <option value="eu">${t('components.deckgl.views.europe')}</option>
+              <option value="asia">${t('components.deckgl.views.asia')}</option>
+              <option value="malaysia">${t('components.deckgl.views.malaysia')}</option>
+              <option value="latam">${t('components.deckgl.views.latam')}</option>
+              <option value="africa">${t('components.deckgl.views.africa')}</option>
+              <option value="oceania">${t('components.deckgl.views.oceania')}</option>
             </select>
           </div>
           <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="${t("header.search")}">
@@ -447,7 +458,7 @@ export class PanelLayoutManager implements AppModule {
       <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
       <nav class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
-          <span class="mobile-menu-title">WORLD MONITOR NEW</span>
+          <span class="mobile-menu-title">${SITE_VARIANT === 'malaysia' ? 'MALAYSIA MONITOR' : 'WORLD MONITOR'}</span>
           <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
@@ -558,7 +569,7 @@ export class PanelLayoutManager implements AppModule {
         <div class="site-footer-brand">
           <img src="/favico/favicon-32x32.png" alt="" width="28" height="28" class="site-footer-icon" />
           <div class="site-footer-brand-text">
-            <span class="site-footer-name">WORLD MONITOR NEW</span>
+            <span class="site-footer-name">${SITE_VARIANT === 'malaysia' ? 'MALAYSIA MONITOR' : 'WORLD MONITOR'}</span>
             <span class="site-footer-sub">v${__APP_VERSION__} &middot; <a href="https://x.com/eliehabib" target="_blank" rel="noopener" class="site-footer-credit">@eliehabib</a></span>
           </div>
         </div>
@@ -572,7 +583,7 @@ export class PanelLayoutManager implements AppModule {
           <a href="https://x.com/worldmonitorai" target="_blank" rel="noopener">X</a>
           ${this.ctx.isDesktopApp ? "" : `<span id="footerDownloadMount"></span>`}
         </nav>
-        <span class="site-footer-copy">&copy; ${new Date().getFullYear()} WORLD MONITOR NEW</span>
+        <span class="site-footer-copy">&copy; ${new Date().getFullYear()} ${SITE_VARIANT === 'malaysia' ? 'Malaysia Monitor' : 'World Monitor'}</span>
       </footer>
     `;
 
@@ -805,25 +816,22 @@ export class PanelLayoutManager implements AppModule {
   private createPanels(): void {
     const panelsGrid = document.getElementById("panelsGrid")!;
 
-    const mapContainer = document.getElementById("mapContainer") as HTMLElement;
-    const preferGlobe =
-      loadFromStorage<string>(STORAGE_KEYS.mapMode, "flat") === "globe";
-    this.ctx.map = new MapContainer(
-      mapContainer,
-      {
-        zoom: this.ctx.isMobile ? 2.5 : 1.0,
-        pan: { x: 0, y: 0 },
-        view: this.ctx.isMobile ? this.ctx.resolvedLocation : "global",
-        layers: this.ctx.mapLayers,
-        timeRange: "7d",
-      },
-      preferGlobe,
-    );
+    const mapContainer = document.getElementById('mapContainer') as HTMLElement;
+    const preferGlobe = loadFromStorage<string>(STORAGE_KEYS.mapMode, 'flat') === 'globe';
+    const initialView = SITE_VARIANT === 'malaysia' ? 'malaysia' : (this.ctx.isMobile ? this.ctx.resolvedLocation : 'global');
+    this.ctx.map = new MapContainer(mapContainer, {
+      zoom: (SITE_VARIANT === 'malaysia' && !this.ctx.isMobile) ? (VARIANT_CONFIG.mapZoom || 6) : (this.ctx.isMobile ? 2.5 : 1.0),
+      pan: { x: 0, y: 0 },
+      view: initialView as any,
+      layers: this.ctx.mapLayers,
+      timeRange: '7d',
+    }, preferGlobe);
 
-    if (
-      this.ctx.mapLayers.resilienceScore &&
-      !this.ctx.map.isDeckGLActive?.()
-    ) {
+    if (SITE_VARIANT === 'malaysia' && VARIANT_CONFIG.mapCenter && !this.ctx.isMobile) {
+      this.ctx.map.setCenter(VARIANT_CONFIG.mapCenter.lat, VARIANT_CONFIG.mapCenter.lon, VARIANT_CONFIG.mapZoom);
+    }
+
+    if (this.ctx.mapLayers.resilienceScore && !this.ctx.map.isDeckGLActive?.()) {
       this.ctx.mapLayers = { ...this.ctx.mapLayers, resilienceScore: false };
       saveToStorage(STORAGE_KEYS.mapLayers, this.ctx.mapLayers);
     }
@@ -831,9 +839,10 @@ export class PanelLayoutManager implements AppModule {
     this.ctx.map.initEscalationGetters();
     this.ctx.currentTimeRange = this.ctx.map.getTimeRange();
 
-    this.createNewsPanel("politics", "panels.politics");
-    this.createNewsPanel("tech", "panels.tech");
-    this.createNewsPanel("finance", "panels.finance");
+    this.createNewsPanel('politics', 'panels.politics');
+    this.createNewsPanel('malaysia', 'panels.malaysia');
+    this.createNewsPanel('tech', 'panels.tech');
+    this.createNewsPanel('finance', 'panels.finance');
 
     this.createPanel("heatmap", () => new HeatmapPanel());
     this.createPanel("markets", () => new MarketPanel());
@@ -914,19 +923,11 @@ export class PanelLayoutManager implements AppModule {
       const panelKey =
         this.ctx.panels[key] && !this.ctx.newsPanels[key] ? `${key}-news` : key;
       if (this.ctx.panels[panelKey]) continue;
-      if (!this.ctx.panelSettings[panelKey] && !this.ctx.panelSettings[key])
-        continue;
-      const panelConfig =
-        this.ctx.panelSettings[panelKey] ??
-        this.ctx.panelSettings[key] ??
-        ALL_PANELS[panelKey] ??
-        ALL_PANELS[key];
-      const label =
-        panelConfig?.name ?? key.charAt(0).toUpperCase() + key.slice(1);
-      const tooltip =
-        PanelLayoutManager.NEWS_PANEL_TOOLTIPS[panelKey] ??
-        PanelLayoutManager.NEWS_PANEL_TOOLTIPS[key];
-      const panel = new NewsPanel(panelKey, label, tooltip);
+      if (!this.ctx.panelSettings[panelKey] && !this.ctx.panelSettings[key]) continue;
+      const panelConfig = this.ctx.panelSettings[panelKey] ?? this.ctx.panelSettings[key] ?? ALL_PANELS[panelKey] ?? ALL_PANELS[key];
+      const label = panelConfig?.name ?? key.charAt(0).toUpperCase() + key.slice(1);
+      const tooltip = PanelLayoutManager.NEWS_PANEL_TOOLTIPS[panelKey] ?? PanelLayoutManager.NEWS_PANEL_TOOLTIPS[key];
+      const panel = new NewsPanel(panelKey, t(label), tooltip);
       this.attachRelatedAssetHandlers(panel);
       panel.setRiskScoreGetter(PanelLayoutManager.computeEventRisk);
       this.ctx.newsPanels[key] = panel;
