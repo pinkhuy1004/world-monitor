@@ -913,7 +913,9 @@ export class EventHandlerManager implements AppModule {
     trackVariantSwitch(SITE_VARIANT, variant);
     await this.exitFullscreenForNavigation();
 
-    if (this.ctx.isDesktopApp || options.isLocalDev) {
+    const h = location.hostname;
+    const isPreview = h.endsWith('.vercel.app') || h.endsWith('.railway.app') || h.endsWith('.vercel.dev');
+    if (this.ctx.isDesktopApp || options.isLocalDev || isPreview) {
       localStorage.setItem('worldmonitor-variant', variant);
       window.location.reload();
       return;
