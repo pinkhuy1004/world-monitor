@@ -598,6 +598,7 @@ export interface PanelConfig {
   enabled: boolean;
   priority?: number;
   premium?: 'locked' | 'enhanced';
+  category?: string;
 }
 
 export interface MapLayers {

@@ -102,4 +102,8 @@ export interface VariantConfig {
   panels: Record<string, PanelConfig>;
   mapLayers: MapLayers;
   mobileMapLayers: MapLayers;
+  brandColor?: string;
+  brandAccent?: string;
+  mapCenter?: { lat: number; lon: number };
+  mapZoom?: number;
 }

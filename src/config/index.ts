@@ -5,6 +5,7 @@
 // VITE_VARIANT=finance → finance.worldmonitor.app (markets/trading)
 
 export { SITE_VARIANT } from './variant';
+export { VARIANT_CONFIG } from './variant-config';
 
 // Shared base configuration (always included)
 export {

@@ -477,6 +477,7 @@ import { loadDesktopSecrets } from '@/services/runtime-config';
 import { applyStoredTheme } from '@/utils/theme-manager';
 import { applyFont } from '@/services/font-settings';
 import { SITE_VARIANT } from '@/config/variant';
+import { VARIANT_CONFIG } from '@/config/variant-config';
 import { clearChunkReloadGuard, installChunkReloadGuard } from '@/bootstrap/chunk-reload';
 import { installSwUpdateHandler } from '@/bootstrap/sw-update';
 
@@ -504,6 +505,13 @@ applyFont();
 // Set data-variant on <html> so CSS theme overrides activate
 if (SITE_VARIANT && SITE_VARIANT !== 'full') {
   document.documentElement.dataset.variant = SITE_VARIANT;
+
+  if (VARIANT_CONFIG.brandColor) {
+    document.documentElement.style.setProperty('--brand-color', VARIANT_CONFIG.brandColor);
+  }
+  if (VARIANT_CONFIG.brandAccent) {
+    document.documentElement.style.setProperty('--brand-accent', VARIANT_CONFIG.brandAccent);
+  }
 
   // Swap favicons to variant-specific versions before browser finishes fetching defaults
   document.querySelectorAll<HTMLLinkElement>('link[rel="icon"], link[rel="apple-touch-icon"]').forEach(link => {

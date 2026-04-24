@@ -882,6 +882,44 @@ const COMMODITY_FEEDS: Record<string, Feed[]> = {
   ],
 };
 
+const MALAYSIA_FEEDS: Record<string, Feed[]> = {
+  malaysia: [
+    // Google News RSS aggregation for reliable Malaysian news — The Star, Bernama, NST direct RSS all 404
+    { name: 'The Star', url: rss('https://news.google.com/rss/search?q=site:thestar.com.my&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'Malaysiakini', url: rss('https://news.google.com/rss/search?q=site:malaysiakini.com&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'Bernama', url: rss('https://news.google.com/rss/search?q=site:bernama.com&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'New Straits Times', url: rss('https://news.google.com/rss/search?q=site:nst.com.my&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'Free Malaysia Today', url: rss('https://www.freemalaysiatoday.com/feed/') },
+    { name: 'Malay Mail', url: rss('https://news.google.com/rss/search?q=site:malaymail.com&hl=en-MY&gl=MY&ceid=MY:en') },
+  ],
+  gov_my: [
+    // Government sources via Google News aggregation — direct gov RSS feeds are unreliable/non-standard
+    { name: 'Bank Negara Malaysia', url: rss('https://news.google.com/rss/search?q=%22Bank+Negara+Malaysia%22&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'MCMC Media', url: rss('https://news.google.com/rss/search?q=MCMC+Malaysia&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'MOH Updates', url: rss('https://news.google.com/rss/search?q=%22Ministry+of+Health+Malaysia%22+OR+%22KKM+Malaysia%22&hl=en-MY&gl=MY&ceid=MY:en') },
+  ],
+  business_my: [
+    { name: 'Edge Malaysia', url: rss('https://news.google.com/rss/search?q=site:theedgemalaysia.com&hl=en-MY&gl=MY&ceid=MY:en') },
+    { name: 'Bursa Malaysia', url: rss('https://news.google.com/rss/search?q=%22Bursa+Malaysia%22&hl=en-MY&gl=MY&ceid=MY:en') },
+  ],
+  igaming: [
+    { name: 'iGaming Business', url: rss('https://igamingbusiness.com/feed/') },
+    { name: 'Gambling Insider', url: rss('https://www.gamblinginsider.com/rss/news.xml') },
+    { name: 'SBC News', url: rss('https://sbcnews.co.uk/feed/') },
+  ],
+  social_my: [
+    { name: 'Reddit r/malaysia', url: rss('https://www.reddit.com/r/malaysia/.rss') },
+  ],
+  sports: [
+    { name: 'Malaysia Sports', url: rss('https://news.google.com/rss/search?q=Malaysia+sports+badminton+OR+football+OR+F1&hl=en-MY&gl=MY&ceid=MY:en') },
+  ],
+  politics: FULL_FEEDS.politics!,
+  tech: FULL_FEEDS.tech!,
+  finance: FULL_FEEDS.finance!,
+  gov: FULL_FEEDS.gov!,
+  intel: FULL_FEEDS.intel!,
+};
+
 // Variant-aware exports
 export const FEEDS = SITE_VARIANT === 'tech'
   ? TECH_FEEDS
@@ -891,7 +929,9 @@ export const FEEDS = SITE_VARIANT === 'tech'
       ? HAPPY_FEEDS
       : SITE_VARIANT === 'commodity'
         ? COMMODITY_FEEDS
-        : FULL_FEEDS;
+        : SITE_VARIANT === 'malaysia'
+          ? MALAYSIA_FEEDS
+          : FULL_FEEDS;
 
 export const SOURCE_REGION_MAP: Record<string, { labelKey: string; feedKeys: string[] }> = {
   // Full (geopolitical) variant regions
@@ -924,6 +964,9 @@ export const SOURCE_REGION_MAP: Record<string, { labelKey: string; feedKeys: str
   dealsCorpFin: { labelKey: 'header.sourceRegionDeals', feedKeys: ['institutional', 'derivatives'] },
   finRegulation: { labelKey: 'header.sourceRegionFinRegulation', feedKeys: ['fin-regulation'] },
   gulfMena: { labelKey: 'header.sourceRegionGulfMena', feedKeys: ['gccNews'] },
+
+  // Malaysia variant regions
+  malaysiaLocals: { labelKey: 'header.sourceRegionMalaysia', feedKeys: ['malaysia'] },
 };
 
 export const INTEL_SOURCES: Feed[] = [
@@ -993,6 +1036,7 @@ export const DEFAULT_ENABLED_SOURCES: Record<string, string[]> = {
   thinktanks: ['Foreign Policy', 'Atlantic Council', 'Foreign Affairs', 'CSIS', 'RAND', 'Brookings', 'Carnegie', 'War on the Rocks'],
   crisis: ['CrisisWatch', 'IAEA', 'WHO', 'UNHCR'],
   energy: ['Oil & Gas', 'Nuclear Energy', 'Reuters Energy', 'Mining & Resources'],
+  malaysia: ['The Star', 'Malaysiakini', 'Bernama', 'New Straits Times', 'Free Malaysia Today'],
 };
 
 export const DEFAULT_ENABLED_INTEL: string[] = [

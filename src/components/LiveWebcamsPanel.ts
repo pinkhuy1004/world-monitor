@@ -45,6 +45,7 @@ const WEBCAM_FEEDS: WebcamFeed[] = [
   { id: 'los-angeles', city: 'Los Angeles', country: 'USA', region: 'americas', channelHandle: '@VeniceVHotel', fallbackVideoId: 'EO_1LWqsCNE' },
   { id: 'miami', city: 'Miami', country: 'USA', region: 'americas', channelHandle: '@FloridaLiveCams', fallbackVideoId: '5YCajRjvWCg' },
   // Asia-Pacific — Taipei first (strait hotspot), then Shanghai, Tokyo, Seoul
+  { id: 'kuala-lumpur', city: 'Kuala Lumpur', country: 'Malaysia', region: 'asia', channelHandle: '@KLSkylineLive', fallbackVideoId: 'S-7A8uR3i7E' },
   { id: 'taipei', city: 'Taipei', country: 'Taiwan', region: 'asia', channelHandle: '@JackyWuTaipei', fallbackVideoId: 'z_fY1pj1VBw' },
   { id: 'shanghai', city: 'Shanghai', country: 'China', region: 'asia', channelHandle: '@SkylineWebcams', fallbackVideoId: '76EwqI5XZIc' },
   { id: 'tokyo', city: 'Tokyo', country: 'Japan', region: 'asia', channelHandle: '@TokyoLiveCam4K', fallbackVideoId: '_k-5U7IeK8g' },
@@ -122,6 +123,7 @@ export class LiveWebcamsPanel extends Panel {
   private readonly forceSingleView = !isDesktopRuntime() && isMobileDevice();
   private readonly EMBED_READY_TIMEOUT_MS = 15000;
   private boundEmbedMessageHandler: (e: MessageEvent) => void;
+  private readonly youtubeOrigin: string | null;
 
   constructor() {
     super({ id: 'live-webcams', title: t('panels.liveWebcams'), className: 'panel-wide', closable: true, collapsible: true, infoTooltip: t('components.liveWebcams.infoTooltip') });
@@ -142,9 +144,23 @@ export class LiveWebcamsPanel extends Panel {
       this.applyIdleMode();
     });
     this.boundEmbedMessageHandler = (e) => this.handleEmbedMessage(e);
+    this.youtubeOrigin = LiveWebcamsPanel.resolveYouTubeOrigin();
     window.addEventListener('message', this.boundEmbedMessageHandler);
     this.render();
     document.addEventListener('keydown', this.boundFullscreenEscHandler);
+  }
+
+  private static resolveYouTubeOrigin(): string | null {
+    const fallbackOrigin = 'https://worldmonitor.app';
+    try {
+      const { protocol, host, origin } = window.location;
+      if (protocol === 'http:' || protocol === 'https:') {
+        if (host === 'tauri.localhost' || host.endsWith('.tauri.localhost')) return fallbackOrigin;
+        return origin;
+      }
+      if (protocol === 'tauri:' || protocol === 'asset:') return fallbackOrigin;
+    } catch { /* ignore */ }
+    return fallbackOrigin;
   }
 
   private createFullscreenButton(): void {
@@ -286,15 +302,18 @@ export class LiveWebcamsPanel extends Panel {
 
   private buildEmbedUrl(videoId: string): string {
     const quality = getStreamQuality();
+    const origin = this.youtubeOrigin || window.location.origin;
     if (isDesktopRuntime()) {
       // Use local sidecar embed — YouTube rejects tauri:// parent origin with error 153.
       // The sidecar serves the embed from http://127.0.0.1:PORT which YouTube accepts.
       const params = new URLSearchParams({ videoId, autoplay: '1', mute: '1' });
       if (quality !== 'auto') params.set('vq', quality);
+      params.set('origin', origin);
+      params.set('parentOrigin', window.location.origin);
       return `http://localhost:${getLocalApiPort()}/api/youtube-embed?${params.toString()}`;
     }
     const vq = quality !== 'auto' ? `&vq=${quality}` : '';
-    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&origin=${window.location.origin}${vq}`;
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&origin=${origin}${vq}`;
   }
 
   private createIframe(feed: WebcamFeed): HTMLIFrameElement {

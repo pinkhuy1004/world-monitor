@@ -443,6 +443,11 @@ const RSS_PROXY_ALLOWED_DOMAINS = new Set([
   // Regional locale feeds
   'www.hurriyet.com.tr', 'tvn24.pl', 'www.polsatnews.pl', 'www.rp.pl', 'meduza.io',
   'novayagazeta.eu', 'www.bangkokpost.com', 'vnexpress.net', 'www.abc.net.au',
+  'www.thestar.com.my', 'www.malaysiakini.com', 'www.bernama.com', 'www.nst.com.my',
+  'www.theedgemarkets.com', 'www.freemalaysiatoday.com', 'www.malaymail.com',
+  'www.sinarharian.com.my', 'www.bnm.gov.my', 'www.mcmc.gov.my', 'www.moh.gov.my',
+  'www.bursamalaysia.com', 'igamingbusiness.com', 'www.gamblinginsider.com',
+  'sbcnews.co.uk', 'www.reddit.com',
   'news.ycombinator.com',
   // Finance variant
   'www.coindesk.com', 'cointelegraph.com',
