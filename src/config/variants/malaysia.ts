@@ -34,12 +34,14 @@ export const DEFAULT_PANELS: Record<string, PanelConfig> = {
   igaming: { name: 'panels.igaming', enabled: true, priority: 3, category: 'industry' },
   social_my: { name: 'panels.social_my', enabled: true, priority: 3, category: 'social' },
   sports: { name: 'panels.sports', enabled: true, priority: 4, category: 'sports' },
+  'live-webcams': FULL_PANELS['live-webcams']!,
 };
 
 export const MALAYSIA_MAP_LAYERS: MapLayers = {
   ...DEFAULT_MAP_LAYERS,
   military: true,
   natural: true,
+  webcams: true,
   cyberThreats: true,
   outages: false,
   resilienceScore: false,
@@ -49,6 +51,7 @@ export const MALAYSIA_MOBILE_MAP_LAYERS: MapLayers = {
   ...MOBILE_DEFAULT_MAP_LAYERS,
   military: true,
   natural: true,
+  webcams: true,
   cyberThreats: true,
 };
 
