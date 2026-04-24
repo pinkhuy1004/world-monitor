@@ -28,6 +28,7 @@ const RELAY_ONLY_DOMAINS = new Set([
   'feeds.capi24.com',
   'islandtimes.org',
   'www.atlanticcouncil.org',
+  'news.google.com',
 ]);
 
 const DIRECT_FETCH_HEADERS = Object.freeze({
