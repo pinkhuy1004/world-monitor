@@ -1036,7 +1036,10 @@ export const DEFAULT_ENABLED_SOURCES: Record<string, string[]> = {
   thinktanks: ['Foreign Policy', 'Atlantic Council', 'Foreign Affairs', 'CSIS', 'RAND', 'Brookings', 'Carnegie', 'War on the Rocks'],
   crisis: ['CrisisWatch', 'IAEA', 'WHO', 'UNHCR'],
   energy: ['Oil & Gas', 'Nuclear Energy', 'Reuters Energy', 'Mining & Resources'],
-  malaysia: ['The Star', 'Malaysiakini', 'Bernama', 'New Straits Times', 'Free Malaysia Today'],
+  malaysia: ['The Star', 'Malaysiakini', 'Bernama', 'New Straits Times', 'Free Malaysia Today', 'Malay Mail'],
+  gov_my: ['Bank Negara Malaysia', 'MCMC Media', 'MOH Updates'],
+  business_my: ['Edge Malaysia', 'Bursa Malaysia'],
+  social_my: ['Reddit r/malaysia'],
 };
 
 export const DEFAULT_ENABLED_INTEL: string[] = [
