@@ -264,7 +264,16 @@ async function sendTelegram(userId, chatId, text) {
   const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'User-Agent': 'worldmonitor-relay/1.0' },
-    body: JSON.stringify({ chat_id: chatId, text }),
+    body: JSON.stringify({
+      chat_id: chatId,
+      text,
+      parse_mode: 'Markdown',
+      reply_markup: {
+        inline_keyboard: [[
+          { text: '🔍 View Details', url: 'https://world-monitor-inky-mu.vercel.app' }
+        ]]
+      }
+    }),
     signal: AbortSignal.timeout(10000),
   });
   if (res.status === 403 || res.status === 400) {
@@ -518,9 +527,11 @@ function shouldNotify(rule, event) {
 }
 
 function formatMessage(event) {
-  const parts = [`[${(event.severity ?? 'high').toUpperCase()}] ${event.payload?.title ?? event.eventType}`];
-  if (event.payload?.source) parts.push(`Source: ${event.payload.source}`);
-  if (event.payload?.link) parts.push(event.payload.link);
+  const severityEmoji = event.severity === 'critical' ? '🔴 ' : event.severity === 'high' ? '🟠 ' : '🔹 ';
+  const title = event.payload?.title ?? event.eventType;
+  const parts = [`${severityEmoji}*[${(event.severity ?? 'high').toUpperCase()}]* *${title}*`];
+  if (event.payload?.source) parts.push(`Source: _${event.payload.source}_`);
+  if (event.payload?.link) parts.push(`[🔗 Read Source](${event.payload.link})`);
   return parts.join('\n');
 }
 
