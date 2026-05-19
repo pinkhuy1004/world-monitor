@@ -177,3 +177,52 @@ export function buildMapUrl(
   url.search = params.toString();
   return url.toString();
 }
+
+export function getVariantUrl(variant: string, fallbackUrl: string): string {
+  try {
+    const h = window.location.hostname;
+    // Don't modify for localhost/127.0.0.1 since navigation-to-variant handles local dev using localStorage and stays on the same URL
+    if (h === 'localhost' || h === '127.0.0.1') {
+      return '#';
+    }
+
+    const port = window.location.port ? `:${window.location.port}` : '';
+    const protocol = window.location.protocol;
+    
+    // List of known variant subdomains to strip out to find the base host
+    const subdomains = ['world', 'tech', 'finance', 'commodity', 'happy', 'malaysia', 'www'];
+    let baseHost = h;
+    for (const sub of subdomains) {
+      if (h.startsWith(`${sub}.`)) {
+        baseHost = h.substring(sub.length + 1);
+        break;
+      }
+    }
+    
+    // Map variant key to the target subdomain
+    const variantSubdomainMap: Record<string, string> = {
+      full: 'world',
+      tech: 'tech',
+      finance: 'finance',
+      commodity: 'commodity',
+      happy: 'happy',
+      malaysia: 'malaysia',
+    };
+    
+    let targetSub = variantSubdomainMap[variant];
+    // If target variant is malaysia, and the base domain is malaysiamonitor.app or worldmonitor.app:
+    if (variant === 'malaysia') {
+      if (baseHost.includes('malaysiamonitor.app')) {
+        targetSub = '';
+      } else {
+        targetSub = 'malaysia';
+      }
+    }
+
+    const prefix = targetSub ? `${targetSub}.` : '';
+    return `${protocol}//${prefix}${baseHost}${port}${window.location.pathname}${window.location.search}${window.location.hash}`;
+  } catch (e) {
+    return fallbackUrl;
+  }
+}
+

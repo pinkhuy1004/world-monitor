@@ -83,7 +83,7 @@ import {
 } from "@/components";
 import { SatelliteFiresPanel } from "@/components/SatelliteFiresPanel";
 import { focusInvestmentOnMap } from "@/services/investments-focus";
-import { debounce, saveToStorage, loadFromStorage } from "@/utils";
+import { debounce, saveToStorage, loadFromStorage, getVariantUrl } from "@/utils";
 import { escapeHtml } from "@/utils/sanitize";
 import {
   FEEDS,
@@ -352,13 +352,13 @@ export class PanelLayoutManager implements AppModule {
               location.hostname === "127.0.0.1";
             const inIframe = window.self !== window.top;
             const vHref = (v: string, prod: string) =>
-              local || SITE_VARIANT === v ? "#" : prod;
+              local || SITE_VARIANT === v ? "#" : getVariantUrl(v, prod);
             const vTarget = (v: string) =>
               !local && SITE_VARIANT !== v && inIframe
                 ? 'target="_blank" rel="noopener"'
                 : "";
             return `
-            <a href="${vHref("full", "https://world.malaysiamonitor.app")}"
+            <a href="${vHref("full", "https://worldmonitor.app")}"
                class="variant-option ${SITE_VARIANT === "full" ? "active" : ""}"
                data-variant="full"
                ${vTarget("full")}
@@ -367,7 +367,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t("header.world")}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("malaysia", "https://malaysiamonitor.app")}"
+            <a href="${vHref("malaysia", "https://malaysia.worldmonitor.app")}"
                class="variant-option ${SITE_VARIANT === "malaysia" ? "active" : ""}"
                data-variant="malaysia"
                ${vTarget("malaysia")}
@@ -376,7 +376,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">Malaysia</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("tech", "https://tech.malaysiamonitor.app")}"
+            <a href="${vHref("tech", "https://tech.worldmonitor.app")}"
                class="variant-option ${SITE_VARIANT === "tech" ? "active" : ""}"
                data-variant="tech"
                ${vTarget("tech")}
@@ -385,7 +385,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t("header.tech")}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("finance", "https://finance.malaysiamonitor.app")}"
+            <a href="${vHref("finance", "https://finance.worldmonitor.app")}"
                class="variant-option ${SITE_VARIANT === "finance" ? "active" : ""}"
                data-variant="finance"
                ${vTarget("finance")}
@@ -394,7 +394,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t("header.finance")}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("commodity", "https://commodity.malaysiamonitor.app")}"
+            <a href="${vHref("commodity", "https://commodity.worldmonitor.app")}"
                class="variant-option ${SITE_VARIANT === "commodity" ? "active" : ""}"
                data-variant="commodity"
                ${vTarget("commodity")}
@@ -403,7 +403,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t("header.commodity")}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("happy", "https://happy.malaysiamonitor.app")}"
+            <a href="${vHref("happy", "https://happy.worldmonitor.app")}"
                class="variant-option ${SITE_VARIANT === "happy" ? "active" : ""}"
                data-variant="happy"
                ${vTarget("happy")}
