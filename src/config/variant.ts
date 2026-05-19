@@ -24,10 +24,10 @@ export const SITE_VARIANT: string = (() => {
   if (h.startsWith('commodity.')) return 'commodity';
   if (h.startsWith('malaysia.')) return 'malaysia';
 
-  if (h === 'localhost' || h === '127.0.0.1') {
-    const stored = localStorage.getItem('worldmonitor-variant');
-    if (stored === 'tech' || stored === 'full' || stored === 'finance' || stored === 'happy' || stored === 'commodity' || stored === 'malaysia') return stored;
-    return buildVariant;
+  // Check localStorage fallback on any domain (e.g. preview/staging deployments) when no subdomain is matched
+  const stored = localStorage.getItem('worldmonitor-variant');
+  if (stored === 'tech' || stored === 'full' || stored === 'finance' || stored === 'happy' || stored === 'commodity' || stored === 'malaysia') {
+    return stored;
   }
 
   return 'malaysia';
