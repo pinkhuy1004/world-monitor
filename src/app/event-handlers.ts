@@ -914,7 +914,8 @@ export class EventHandlerManager implements AppModule {
     trackVariantSwitch(SITE_VARIANT, variant);
     await this.exitFullscreenForNavigation();
 
-    if (this.ctx.isDesktopApp || options.isLocalDev) {
+    const isProdDomain = location.hostname.endsWith('malaysiamonitor.app') || location.hostname.endsWith('worldmonitor.app');
+    if (this.ctx.isDesktopApp || options.isLocalDev || !isProdDomain) {
       localStorage.setItem('worldmonitor-variant', variant);
       window.location.href = variant === 'malaysia' ? '/?view=malaysia' : '/';
       return;
