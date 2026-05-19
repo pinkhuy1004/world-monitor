@@ -2,8 +2,13 @@ import type { Feed } from '@/types';
 import { SITE_VARIANT } from './variant';
 import { rssProxyUrl } from '@/utils';
 
-const rss = rssProxyUrl;
-const railwayRss = rssProxyUrl;
+const rss = (url: string) => {
+  if (SITE_VARIANT === 'malaysia' && url.includes('news.google.com/rss/search?q=')) {
+    return rssProxyUrl(url.replace('search?q=', 'search?q=(Malaysia)+AND+'));
+  }
+  return rssProxyUrl(url);
+};
+const railwayRss = rss;
 
 // Source tier system — canonical definition lives in server/_shared/source-tiers.ts
 // so server-side code can import it without pulling in client-only modules.
@@ -984,6 +989,7 @@ export const DEFAULT_ENABLED_SOURCES: Record<string, string[]> = {
   middleeast: ['BBC Middle East', 'Al Jazeera', 'Al Arabiya', 'Guardian ME', 'BBC Persian', 'Iran International', 'Haaretz', 'Asharq News', 'The National'],
   africa: ['BBC Africa', 'News24', 'Africanews', 'Jeune Afrique', 'Africa News', 'Premium Times', 'Channels TV', 'Sahel Crisis'],
   latam: ['BBC Latin America', 'Reuters LatAm', 'InSight Crime', 'Mexico News Daily', 'Clarín', 'Primicias', 'Infobae Americas', 'El Universo'],
+  malaysia: ['The Star', 'Malay Mail', 'Bernama', 'FMT', 'NST'],
   asia: ['BBC Asia', 'The Diplomat', 'South China Morning Post', 'Reuters Asia', 'Nikkei Asia', 'CNA', 'Asia News', 'The Hindu'],
   tech: ['Hacker News', 'Ars Technica', 'The Verge', 'MIT Tech Review'],
   ai: ['AI News', 'VentureBeat AI', 'The Verge AI', 'MIT Tech Review', 'ArXiv AI'],

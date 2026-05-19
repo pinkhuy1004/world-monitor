@@ -2577,6 +2577,7 @@ export class GlobeMap {
     latam:    { lat: -15, lng: -60,  altitude: 1.5 },
     africa:   { lat:  5,  lng:  20,  altitude: 1.5 },
     oceania:  { lat: -25, lng: 140,  altitude: 1.5 },
+    malaysia: { lat: 4.2105, lng: 101.9758, altitude: 0.3 },
   };
 
   public setView(view: MapView, zoom?: number): void {

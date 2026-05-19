@@ -915,7 +915,7 @@ export class EventHandlerManager implements AppModule {
 
     if (this.ctx.isDesktopApp || options.isLocalDev) {
       localStorage.setItem('worldmonitor-variant', variant);
-      window.location.reload();
+      window.location.href = variant === 'malaysia' ? '/?view=malaysia' : '/';
       return;
     }
 
