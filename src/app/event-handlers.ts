@@ -27,6 +27,7 @@ import {
   ExportPanel,
   getCurrentTheme,
   setTheme,
+  getVariantUrl,
 } from '@/utils';
 import {
   IDLE_PAUSE_MS,
@@ -919,8 +920,8 @@ export class EventHandlerManager implements AppModule {
       return;
     }
 
-    const target = options.href || VARIANT_META[variant]?.url;
-    if (!target) return;
+    const target = options.href || getVariantUrl(variant, VARIANT_META[variant]?.url || '');
+    if (!target || target === '#') return;
     try {
       const parsed = new URL(target, window.location.href);
       if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return;
