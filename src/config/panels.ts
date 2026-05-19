@@ -38,6 +38,7 @@ const FULL_PANELS: Record<string, PanelConfig> = {
   africa: { name: 'Africa', enabled: true, priority: 1 },
   latam: { name: 'Latin America', enabled: true, priority: 1 },
   asia: { name: 'Asia-Pacific', enabled: true, priority: 1 },
+  malaysia: { name: 'Malaysia News', enabled: true, priority: 1 },
   energy: { name: 'Energy & Resources', enabled: true, priority: 1 },
   gov: { name: 'Government', enabled: true, priority: 1 },
   thinktanks: { name: 'Think Tanks', enabled: true, priority: 1 },
@@ -90,7 +91,7 @@ const FULL_PANELS: Record<string, PanelConfig> = {
   giving: { name: 'Global Giving', enabled: false, priority: 2 },
   displacement: { name: 'UNHCR Displacement', enabled: true, priority: 2 },
   climate: { name: 'Climate Anomalies', enabled: true, priority: 2 },
-  'climate-news': { name: 'Climate News', enabled: false, priority: 2 },
+  'climate-news': { name: 'Climate News', enabled: true, priority: 2 },
   'population-exposure': { name: 'Population Exposure', enabled: true, priority: 2 },
   'security-advisories': { name: 'Security Advisories', enabled: true, priority: 2 },
   'sanctions-pressure': { name: 'Sanctions Pressure', enabled: true, priority: 2 },
@@ -909,6 +910,7 @@ export const ALL_PANELS: Record<string, PanelConfig> = {
 /** Per-variant canonical panel order (keys = which panels are enabled by default). */
 export const VARIANT_DEFAULTS: Record<string, string[]> = {
   full:      Object.keys(FULL_PANELS),
+  malaysia:  Object.keys(FULL_PANELS),
   tech:      Object.keys(TECH_PANELS),
   finance:   Object.keys(FINANCE_PANELS),
   commodity: Object.keys(COMMODITY_PANELS),
@@ -1040,7 +1042,7 @@ export const PANEL_CATEGORY_MAP: Record<string, { labelKey: string; panelKeys: s
   },
   regionalNews: {
     labelKey: 'header.panelCatRegionalNews',
-    panelKeys: ['politics', 'us', 'europe', 'middleeast', 'africa', 'latam', 'asia'],
+    panelKeys: ['politics', 'us', 'europe', 'middleeast', 'africa', 'latam', 'asia', 'malaysia'],
   },
   marketsFinance: {
     labelKey: 'header.panelCatMarketsFinance',

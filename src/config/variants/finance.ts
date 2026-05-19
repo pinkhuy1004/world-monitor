@@ -23,7 +23,12 @@ export {
 import type { Feed } from '@/types';
 import { rssProxyUrl } from '@/utils';
 
-const rss = rssProxyUrl;
+const rss = (url: string) => {
+  if (url.includes('news.google.com/rss/search?q=')) {
+    return rssProxyUrl(url.replace('search?q=', 'search?q=(Malaysia)+AND+'));
+  }
+  return rssProxyUrl(url);
+};
 
 export const FEEDS: Record<string, Feed[]> = {
   // Core Markets & Trading News (all free RSS / Google News proxies)

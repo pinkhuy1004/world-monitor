@@ -313,7 +313,7 @@ export class PanelLayoutManager implements AppModule {
       case PanelGateReason.ANONYMOUS:
         return () => this.ctx.authModal?.open();
       case PanelGateReason.FREE_TIER:
-        return () => window.open("https://worldmonitor.app/pro", "_blank");
+        return () => window.open("https://malaysiamonitor.app/pro", "_blank");
       default:
         return () => {};
     }
@@ -358,7 +358,7 @@ export class PanelLayoutManager implements AppModule {
                 ? 'target="_blank" rel="noopener"'
                 : "";
             return `
-            <a href="${vHref("full", "https://worldmonitor.app")}"
+            <a href="${vHref("full", "https://world.malaysiamonitor.app")}"
                class="variant-option ${SITE_VARIANT === "full" ? "active" : ""}"
                data-variant="full"
                ${vTarget("full")}
@@ -367,7 +367,16 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t("header.world")}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("tech", "https://tech.worldmonitor.app")}"
+            <a href="${vHref("malaysia", "https://malaysiamonitor.app")}"
+               class="variant-option ${SITE_VARIANT === "malaysia" ? "active" : ""}"
+               data-variant="malaysia"
+               ${vTarget("malaysia")}
+               title="Malaysia${SITE_VARIANT === "malaysia" ? ` ${t("common.currentVariant")}` : ""}">
+              <span class="variant-icon">🇲🇾</span>
+              <span class="variant-label">Malaysia</span>
+            </a>
+            <span class="variant-divider"></span>
+            <a href="${vHref("tech", "https://tech.malaysiamonitor.app")}"
                class="variant-option ${SITE_VARIANT === "tech" ? "active" : ""}"
                data-variant="tech"
                ${vTarget("tech")}
@@ -376,7 +385,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t("header.tech")}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("finance", "https://finance.worldmonitor.app")}"
+            <a href="${vHref("finance", "https://finance.malaysiamonitor.app")}"
                class="variant-option ${SITE_VARIANT === "finance" ? "active" : ""}"
                data-variant="finance"
                ${vTarget("finance")}
@@ -385,7 +394,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t("header.finance")}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("commodity", "https://commodity.worldmonitor.app")}"
+            <a href="${vHref("commodity", "https://commodity.malaysiamonitor.app")}"
                class="variant-option ${SITE_VARIANT === "commodity" ? "active" : ""}"
                data-variant="commodity"
                ${vTarget("commodity")}
@@ -394,7 +403,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t("header.commodity")}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref("happy", "https://happy.worldmonitor.app")}"
+            <a href="${vHref("happy", "https://happy.malaysiamonitor.app")}"
                class="variant-option ${SITE_VARIANT === "happy" ? "active" : ""}"
                data-variant="happy"
                ${vTarget("happy")}
@@ -403,7 +412,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">Good News</span>
             </a>`;
           })()}</div>
-          <span class="logo">MONITOR</span><span class="logo-mobile">WORLD MONITOR NEW</span><span class="version">v${__APP_VERSION__}</span>${BETA_MODE ? '<span class="beta-badge">BETA</span>' : ""}
+          <span class="logo">MONITOR</span><span class="logo-mobile">MALAYSIA MONITOR</span><span class="version">v${__APP_VERSION__}</span>${BETA_MODE ? '<span class="beta-badge">BETA</span>' : ""}
           <a href="https://x.com/eliehabib" target="_blank" rel="noopener" class="credit-link">
             <svg class="x-logo" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             <span class="credit-text">@eliehabib</span>
@@ -429,6 +438,7 @@ export class PanelLayoutManager implements AppModule {
               <option value="latam">${t("components.deckgl.views.latam")}</option>
               <option value="africa">${t("components.deckgl.views.africa")}</option>
               <option value="oceania">${t("components.deckgl.views.oceania")}</option>
+              <option value="malaysia">${t("components.deckgl.views.malaysia")}</option>
             </select>
           </div>
           <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="${t("header.search")}">
@@ -447,7 +457,7 @@ export class PanelLayoutManager implements AppModule {
       <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
       <nav class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
-          <span class="mobile-menu-title">WORLD MONITOR NEW</span>
+          <span class="mobile-menu-title">MALAYSIA MONITOR</span>
           <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
@@ -456,6 +466,7 @@ export class PanelLayoutManager implements AppModule {
         ${(() => {
           const variants = [
             { key: "full", icon: "🌍", label: t("header.world") },
+            { key: "malaysia", icon: "🇲🇾", label: "Malaysia" },
             { key: "tech", icon: "💻", label: t("header.tech") },
             { key: "finance", icon: "📈", label: t("header.finance") },
             { key: "commodity", icon: "⛏️", label: t("header.commodity") },
@@ -493,10 +504,10 @@ export class PanelLayoutManager implements AppModule {
         </a>
         <div class="mobile-menu-divider"></div>
         <div class="mobile-menu-footer-links">
-          <a href="${this.ctx.isDesktopApp ? "https://worldmonitor.app/pro" : "https://www.worldmonitor.app/pro"}" target="_blank" rel="noopener">Pro</a>
-          <a href="${this.ctx.isDesktopApp ? "https://worldmonitor.app/blog/" : "https://www.worldmonitor.app/blog/"}" target="_blank" rel="noopener">Blog</a>
-          <a href="${this.ctx.isDesktopApp ? "https://worldmonitor.app/docs" : "https://www.worldmonitor.app/docs"}" target="_blank" rel="noopener">Docs</a>
-          <a href="https://status.worldmonitor.app/" target="_blank" rel="noopener">Status</a>
+          <a href="${this.ctx.isDesktopApp ? "https://malaysiamonitor.app/pro" : "https://www.malaysiamonitor.app/pro"}" target="_blank" rel="noopener">Pro</a>
+          <a href="${this.ctx.isDesktopApp ? "https://malaysiamonitor.app/blog/" : "https://www.malaysiamonitor.app/blog/"}" target="_blank" rel="noopener">Blog</a>
+          <a href="${this.ctx.isDesktopApp ? "https://malaysiamonitor.app/docs" : "https://www.malaysiamonitor.app/docs"}" target="_blank" rel="noopener">Docs</a>
+          <a href="https://status.malaysiamonitor.app/" target="_blank" rel="noopener">Status</a>
         </div>
         <div class="mobile-menu-version">v${__APP_VERSION__}</div>
       </nav>
@@ -513,6 +524,7 @@ export class PanelLayoutManager implements AppModule {
           { value: "latam", label: t("components.deckgl.views.latam") },
           { value: "africa", label: t("components.deckgl.views.africa") },
           { value: "oceania", label: t("components.deckgl.views.oceania") },
+          { value: "malaysia", label: t("components.deckgl.views.malaysia") },
         ]
           .map(
             (r) =>
@@ -558,21 +570,21 @@ export class PanelLayoutManager implements AppModule {
         <div class="site-footer-brand">
           <img src="/favico/favicon-32x32.png" alt="" width="28" height="28" class="site-footer-icon" />
           <div class="site-footer-brand-text">
-            <span class="site-footer-name">WORLD MONITOR NEW</span>
+            <span class="site-footer-name">MALAYSIA MONITOR</span>
             <span class="site-footer-sub">v${__APP_VERSION__} &middot; <a href="https://x.com/eliehabib" target="_blank" rel="noopener" class="site-footer-credit">@eliehabib</a></span>
           </div>
         </div>
         <nav>
-          <a href="${this.ctx.isDesktopApp ? "https://worldmonitor.app/pro" : "https://www.worldmonitor.app/pro"}" target="_blank" rel="noopener">Pro</a>
-          <a href="${this.ctx.isDesktopApp ? "https://worldmonitor.app/blog/" : "https://www.worldmonitor.app/blog/"}" target="_blank" rel="noopener">Blog</a>
-          <a href="${this.ctx.isDesktopApp ? "https://worldmonitor.app/docs" : "https://www.worldmonitor.app/docs"}" target="_blank" rel="noopener">Docs</a>
-          <a href="https://status.worldmonitor.app/" target="_blank" rel="noopener">Status</a>
+          <a href="${this.ctx.isDesktopApp ? "https://malaysiamonitor.app/pro" : "https://www.malaysiamonitor.app/pro"}" target="_blank" rel="noopener">Pro</a>
+          <a href="${this.ctx.isDesktopApp ? "https://malaysiamonitor.app/blog/" : "https://www.malaysiamonitor.app/blog/"}" target="_blank" rel="noopener">Blog</a>
+          <a href="${this.ctx.isDesktopApp ? "https://malaysiamonitor.app/docs" : "https://www.malaysiamonitor.app/docs"}" target="_blank" rel="noopener">Docs</a>
+          <a href="https://status.malaysiamonitor.app/" target="_blank" rel="noopener">Status</a>
           <a href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener">GitHub</a>
           <a href="https://discord.gg/re63kWKxaz" target="_blank" rel="noopener">Discord</a>
           <a href="https://x.com/worldmonitorai" target="_blank" rel="noopener">X</a>
           ${this.ctx.isDesktopApp ? "" : `<span id="footerDownloadMount"></span>`}
         </nav>
-        <span class="site-footer-copy">&copy; ${new Date().getFullYear()} WORLD MONITOR NEW</span>
+        <span class="site-footer-copy">&copy; ${new Date().getFullYear()} MALAYSIA MONITOR</span>
       </footer>
     `;
 
@@ -820,6 +832,11 @@ export class PanelLayoutManager implements AppModule {
       preferGlobe,
     );
 
+    if (SITE_VARIANT === 'malaysia') {
+      // Focus on Malaysia
+      this.ctx.map.setCenter(4.2105, 101.9758, 5);
+    }
+
     if (
       this.ctx.mapLayers.resilienceScore &&
       !this.ctx.map.isDeckGLActive?.()
@@ -906,6 +923,7 @@ export class PanelLayoutManager implements AppModule {
     this.createNewsPanel("africa", "panels.africa");
     this.createNewsPanel("latam", "panels.latam");
     this.createNewsPanel("asia", "panels.asia");
+    this.createNewsPanel("malaysia", "Malaysia News");
     this.createNewsPanel("energy", "panels.energy");
 
     for (const key of Object.keys(FEEDS)) {

@@ -95,7 +95,10 @@ async function fetchFeed(url) {
 }
 
 function parseNewestDate(xml) {
-  const parser = new XMLParser({ ignoreAttributes: false });
+  const parser = new XMLParser({ 
+    ignoreAttributes: false,
+    processEntities: false, // Disable entity processing to avoid limits
+  });
   const doc = parser.parse(xml);
 
   const dates = [];
