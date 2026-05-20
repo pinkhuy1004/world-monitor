@@ -538,6 +538,33 @@ export class App {
         localStorage.setItem(HAPPY_PANEL_FIX_KEY, 'done');
       }
 
+      // One-time migration: fix malaysia variant sessions that got global/cross-variant panels enabled
+      const MALAYSIA_PANEL_FIX_KEY = 'worldmonitor-malaysia-panel-fix-v2';
+      if (SITE_VARIANT === 'malaysia' && !localStorage.getItem(MALAYSIA_PANEL_FIX_KEY)) {
+        const malaysiaKeys = new Set(VARIANT_DEFAULTS['malaysia'] ?? []);
+        let fixed = false;
+        for (const key of Object.keys(panelSettings)) {
+          if (!malaysiaKeys.has(key) && !isDynamicPanel(key) && panelSettings[key]?.enabled) {
+            panelSettings[key] = { ...panelSettings[key]!, enabled: false };
+            fixed = true;
+          }
+        }
+        for (const key of malaysiaKeys) {
+          if (panelSettings[key] && !panelSettings[key].enabled) {
+            panelSettings[key].enabled = true;
+            fixed = true;
+          }
+        }
+        if (fixed) {
+          saveToStorage(STORAGE_KEYS.panels, panelSettings);
+          localStorage.removeItem('panel-order');
+          localStorage.removeItem('panel-order-bottom');
+          localStorage.removeItem('panel-order-bottom-set');
+          localStorage.removeItem('worldmonitor-panel-spans');
+        }
+        localStorage.setItem(MALAYSIA_PANEL_FIX_KEY, 'done');
+      }
+
       console.log('[App] Loaded panel settings from storage:', Object.entries(panelSettings).filter(([_, v]) => !v.enabled).map(([k]) => k));
 
       // One-time migration: reorder panels for existing users (v1.9 panel layout)

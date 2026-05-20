@@ -51,8 +51,8 @@ async function fetchMarketQuotes() {
 
   // --- Primary: Alpha Vantage REALTIME_BULK_QUOTES ---
   if (avKey) {
-    // AV doesn't support Indian NSE symbols or Yahoo-only indices — skip those
-    const avSymbols = MARKET_SYMBOLS.filter((s) => !YAHOO_ONLY.has(s) && !s.endsWith('.NS'));
+    // AV doesn't support Bursa Malaysia (.KL), Indian NSE (.NS) symbols, or Yahoo-only indices — skip those
+    const avSymbols = MARKET_SYMBOLS.filter((s) => !YAHOO_ONLY.has(s) && !s.endsWith('.KL') && !s.endsWith('.NS'));
     const avResults = await fetchAvBulkQuotes(avSymbols, avKey);
     for (const [sym, q] of avResults) {
       const meta = stocksConfig.symbols.find(s => s.symbol === sym);
@@ -77,7 +77,7 @@ async function fetchMarketQuotes() {
     }
   }
 
-  // --- Fallback: Yahoo (for remaining symbols including Yahoo-only and Indian markets) ---
+  // --- Fallback: Yahoo (for remaining symbols including Yahoo-only, Bursa Malaysia .KL, and other regional markets) ---
   const allYahoo = MARKET_SYMBOLS.filter((s) => !covered.has(s));
   for (let i = 0; i < allYahoo.length; i++) {
     const s = allYahoo[i];
