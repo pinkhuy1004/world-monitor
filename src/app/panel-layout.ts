@@ -827,7 +827,7 @@ export class PanelLayoutManager implements AppModule {
       {
         zoom: this.ctx.isMobile ? 2.5 : 1.0,
         pan: { x: 0, y: 0 },
-        view: this.ctx.isMobile ? this.ctx.resolvedLocation : "global",
+        view: SITE_VARIANT === 'malaysia' ? 'malaysia' : (this.ctx.isMobile ? this.ctx.resolvedLocation : "global"),
         layers: this.ctx.mapLayers,
         timeRange: "7d",
       },

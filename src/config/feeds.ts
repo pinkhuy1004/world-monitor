@@ -887,6 +887,73 @@ const COMMODITY_FEEDS: Record<string, Feed[]> = {
   ],
 };
 
+const gnRss = (q: string) => rss(`https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-US&gl=US&ceid=US:en`);
+
+const MALAYSIA_FEEDS: Record<string, Feed[]> = {
+  politics: [
+    { name: 'Malaysia Politics', url: gnRss('(Malaysia OR "Anwar Ibrahim" OR "Dewan Rakyat" OR Putrajaya) AND (politics OR government OR election OR cabinet OR parliament OR coalition) when:7d') },
+    { name: 'Bernama Politics', url: gnRss('site:bernama.com politics when:7d') },
+    { name: 'The Star Politics', url: gnRss('site:thestar.com.my news politics when:7d') },
+    { name: 'FMT Politics', url: gnRss('site:freemalaysiatoday.com category/nation when:7d') },
+  ],
+  us: [
+    { name: 'US-Malaysia Relations', url: gnRss('(Malaysia AND ("United States" OR US OR Washington OR Biden)) OR ("US-Malaysia" OR "Malaysia-US" OR "US investment" Malaysia) when:7d') },
+    { name: 'US Tech Investment Malaysia', url: gnRss('Malaysia AND (Intel OR AWS OR Microsoft OR Google OR Nvidia OR data center OR semiconductor) when:7d') },
+  ],
+  europe: [
+    { name: 'Europe-Malaysia Relations', url: gnRss('(Malaysia AND ("European Union" OR EU OR Europe OR UK OR Germany OR France)) OR ("EU-Malaysia" OR "UK-Malaysia" OR "Malaysia-Europe") when:7d') },
+  ],
+  middleeast: [
+    { name: 'Middle East-Malaysia Relations', url: gnRss('(Malaysia AND ("Middle East" OR Saudi OR UAE OR Qatar OR Turkey OR "Islamic finance" OR halal)) when:7d') },
+  ],
+  tech: [
+    { name: 'Penang Semiconductor Hub', url: gnRss('(Malaysia OR Penang OR semiconductor OR chip OR E&E OR packaging OR foundry OR "silicon valley of the east") when:7d') },
+    { name: 'Malaysia Tech Sector', url: gnRss('(Malaysia OR Cyberjaya OR Kuala Lumpur OR Johor) AND (tech OR technology OR "data center" OR startup OR "digital economy" OR 5G OR MDEC) when:7d') },
+    { name: 'The Star Tech', url: gnRss('site:thestar.com.my tech when:7d') },
+  ],
+  ai: [
+    { name: 'AI in Malaysia', url: gnRss('(Malaysia OR Kuala Lumpur OR Johor OR Penang) AND (AI OR "artificial intelligence" OR Nvidia OR Microsoft OR Google OR OpenAI OR "machine learning" OR "large language model" OR supercomputer OR "data center") when:7d') },
+  ],
+  finance: [
+    { name: 'Bursa Malaysia', url: gnRss('("Bursa Malaysia" OR Ringgit OR MYR OR "Bank Negara" OR BNM OR Petronas OR "Malaysia economy") when:7d') },
+    { name: 'The Edge Finance', url: gnRss('site:theedgemalaysia.com when:2d') },
+    { name: 'The Star Business', url: gnRss('site:thestar.com.my business when:2d') },
+  ],
+  gov: [
+    { name: 'Bernama Official', url: gnRss('site:bernama.com when:2d') },
+    { name: 'Malaysia Government', url: gnRss('(Malaysia AND (government OR MITI OR MCMC OR "Ministry of Finance" OR Putrajaya OR parliament OR "Anwar Ibrahim")) when:7d') },
+  ],
+  africa: [
+    { name: 'Africa-Malaysia Trade', url: gnRss('(Malaysia AND (Africa OR "palm oil" OR trade OR exports OR biofuel)) when:7d') },
+  ],
+  latam: [
+    { name: 'LatAm-Malaysia Trade', url: gnRss('(Malaysia AND ("Latin America" OR Brazil OR Mexico OR trade OR CPTPP OR Petronas)) when:7d') },
+  ],
+  malaysia: [
+    { name: 'The Star', url: gnRss('site:thestar.com.my when:2d') },
+    { name: 'Malay Mail', url: gnRss('site:malaymail.com when:2d') },
+    { name: 'Bernama', url: gnRss('site:bernama.com when:2d') },
+    { name: 'Free Malaysia Today', url: gnRss('site:freemalaysiatoday.com when:2d') },
+    { name: 'New Straits Times', url: gnRss('site:nst.com.my when:2d') },
+    { name: 'The Edge Malaysia', url: gnRss('site:theedgemalaysia.com when:2d') },
+  ],
+  asia: [
+    { name: 'ASEAN & Malaysia', url: gnRss('(Malaysia OR ASEAN OR "South China Sea") AND (Singapore OR Indonesia OR Thailand OR Vietnam OR Philippines OR Brunei OR regional) when:7d') },
+  ],
+  energy: [
+    { name: 'Petronas & Energy', url: gnRss('(Malaysia OR Petronas OR Sarawak OR Sabah) AND ("oil and gas" OR LNG OR petroleum OR solar OR renewable OR "green transition" OR "energy transition" OR electricity OR TNB) when:7d') },
+  ],
+  thinktanks: [
+    { name: 'ISIS Malaysia Geopolitics', url: gnRss('(Malaysia OR "Southeast Asia" OR ASEAN) AND (geopolitics OR security OR strategy OR "foreign policy" OR "think tank" OR "South China Sea" OR maritime) when:7d') },
+  ],
+  crisis: [
+    { name: 'Malaysia Crisis & Floods', url: gnRss('(Malaysia OR Kelantan OR Terengganu OR Selangor OR Johor OR Pahang) AND (flood OR banjir OR disaster OR emergency OR haze OR landslide OR jerebu OR public health) when:7d') },
+  ],
+  layoffs: [
+    { name: 'Malaysia Job Market', url: gnRss('(Malaysia OR "Southeast Asia") AND (layoffs OR "job cuts" OR retrenchment OR hiring OR talent OR employment) when:7d') },
+  ],
+};
+
 // Variant-aware exports
 export const FEEDS = SITE_VARIANT === 'tech'
   ? TECH_FEEDS
@@ -896,7 +963,9 @@ export const FEEDS = SITE_VARIANT === 'tech'
       ? HAPPY_FEEDS
       : SITE_VARIANT === 'commodity'
         ? COMMODITY_FEEDS
-        : FULL_FEEDS;
+        : SITE_VARIANT === 'malaysia'
+          ? MALAYSIA_FEEDS
+          : FULL_FEEDS;
 
 export const SOURCE_REGION_MAP: Record<string, { labelKey: string; feedKeys: string[] }> = {
   // Full (geopolitical) variant regions
