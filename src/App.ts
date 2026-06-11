@@ -566,7 +566,7 @@ export class App {
       }
 
       // One-time migration: reset live channels for malaysia variant to include local news
-      const MALAYSIA_CHANNELS_MIGRATION_KEY = 'worldmonitor-malaysia-live-channels-v1';
+      const MALAYSIA_CHANNELS_MIGRATION_KEY = 'worldmonitor-malaysia-live-channels-v2';
       if (SITE_VARIANT === 'malaysia' && !localStorage.getItem(MALAYSIA_CHANNELS_MIGRATION_KEY)) {
         localStorage.removeItem(STORAGE_KEYS.liveChannels);
         localStorage.setItem(MALAYSIA_CHANNELS_MIGRATION_KEY, 'done');
