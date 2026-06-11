@@ -12,6 +12,7 @@ function sanitizeVideoId(value) {
 
 const ALLOWED_ORIGINS = [
   /^https:\/\/(.*\.)?worldmonitor\.app$/,
+  /^https:\/\/(.*\.)?malaysiamonitor\.xyz$/,
   /^https:\/\/world-?monitor.*\.vercel\.app$/,
   /^https:\/\/worldmonitor-[a-z0-9-]+\.vercel\.app$/,
   /^https?:\/\/localhost(:\d+)?$/,
