@@ -539,7 +539,7 @@ export class App {
       }
 
       // One-time migration: fix malaysia variant sessions that got global/cross-variant panels enabled
-      const MALAYSIA_PANEL_FIX_KEY = 'worldmonitor-malaysia-panel-fix-v2';
+      const MALAYSIA_PANEL_FIX_KEY = 'worldmonitor-malaysia-panel-fix-v3';
       if (SITE_VARIANT === 'malaysia' && !localStorage.getItem(MALAYSIA_PANEL_FIX_KEY)) {
         const malaysiaKeys = new Set(VARIANT_DEFAULTS['malaysia'] ?? []);
         let fixed = false;
@@ -563,6 +563,13 @@ export class App {
           localStorage.removeItem('worldmonitor-panel-spans');
         }
         localStorage.setItem(MALAYSIA_PANEL_FIX_KEY, 'done');
+      }
+
+      // One-time migration: reset live channels for malaysia variant to include local news
+      const MALAYSIA_CHANNELS_MIGRATION_KEY = 'worldmonitor-malaysia-live-channels-v1';
+      if (SITE_VARIANT === 'malaysia' && !localStorage.getItem(MALAYSIA_CHANNELS_MIGRATION_KEY)) {
+        localStorage.removeItem(STORAGE_KEYS.liveChannels);
+        localStorage.setItem(MALAYSIA_CHANNELS_MIGRATION_KEY, 'done');
       }
 
       console.log('[App] Loaded panel settings from storage:', Object.entries(panelSettings).filter(([_, v]) => !v.enabled).map(([k]) => k));
