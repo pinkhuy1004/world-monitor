@@ -84,8 +84,8 @@ const TECH_LIVE_CHANNELS: LiveChannel[] = [
 
 // Malaysia variant: Malaysian news channels
 const MALAYSIA_LIVE_CHANNELS: LiveChannel[] = [
-  { id: 'astroawani', name: 'Astro Awani', handle: '@astroawani' },
-  { id: 'beritartm', name: 'Berita RTM', handle: '@BeritaRTMBES' },
+  { id: 'astroawani', name: 'Astro Awani', handle: '@astroawani', fallbackVideoId: 'mkVyNaGee8A' },
+  { id: 'beritartm', name: 'Berita RTM', handle: '@BeritaRTMBES', fallbackVideoId: 'HxgK1_xItSI' },
   { id: 'bloomberg', name: 'Bloomberg', handle: '@markets', fallbackVideoId: 'iEpJwprxDdk' },
   { id: 'sky', name: 'SkyNews', handle: '@SkyNews', fallbackVideoId: 'uvviIF4725I' },
   { id: 'cnbc', name: 'CNBC', handle: '@CNBC', fallbackVideoId: '9NyxcX3rhQs' },
@@ -143,8 +143,8 @@ export const OPTIONAL_LIVE_CHANNELS: LiveChannel[] = [
   { id: 'rt-espanol', name: 'RT Español', hlsUrl: 'https://rt-esp.rttv.com/dvr/rtesp/playlist.m3u8', useFallbackOnly: true },
   { id: 'cgtn-espanol', name: 'CGTN Español', hlsUrl: 'https://news.cgtn.com/resource/live/espanol/cgtn-e.m3u8', useFallbackOnly: true },
   // Asia
-  { id: 'astroawani', name: 'Astro Awani', handle: '@astroawani' },
-  { id: 'beritartm', name: 'Berita RTM', handle: '@BeritaRTMBES' },
+  { id: 'astroawani', name: 'Astro Awani', handle: '@astroawani', fallbackVideoId: 'mkVyNaGee8A' },
+  { id: 'beritartm', name: 'Berita RTM', handle: '@BeritaRTMBES', fallbackVideoId: 'HxgK1_xItSI' },
   { id: 'tbs-news', name: 'TBS NEWS DIG', handle: '@tbsnewsdig', fallbackVideoId: 'aUDm173E8k8' },
   { id: 'ann-news', name: 'ANN News', handle: '@ANNnewsCH' },
   { id: 'ntv-news', name: 'NTV News (Japan)', handle: '@ntv_news' },
